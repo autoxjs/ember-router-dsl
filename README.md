@@ -1,6 +1,11 @@
 # Ember-router-dsl
 
-This README outlines the details of collaborating on this Ember addon.
+Exposes the following methods
+```coffee
+{namespace, children, child, collection, model, view, form} = DSL.import @, 
+```
+
+in the `router.js` file as well as a `routerData` service that holds meta data for the routes
 
 ## Installation
 

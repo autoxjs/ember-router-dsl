@@ -1,7 +1,7 @@
 {
   "name": "ember-router-dsl",
   "version": "0.1.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "description": "router dsl for more descriptive routes and easier automation",
   "directories": {
     "doc": "doc",
     "test": "tests"
@@ -11,7 +11,7 @@
     "start": "ember server",
     "test": "ember try:testall"
   },
-  "repository": "",
+  "repository": "https://github.com/autoxjs/ember-router-dsl",
   "engines": {
     "node": ">= 0.10.0"
   },

@@ -1,6 +1,6 @@
 {
   "name": "ember-router-dsl",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "router dsl for more descriptive routes and easier automation",
   "directories": {
     "doc": "doc",

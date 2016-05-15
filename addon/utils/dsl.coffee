@@ -29,42 +29,45 @@ class DSL
       f.call @
       ctxStack.popObject()
 
-  namespace: (name, f=noop) ->
-    RouteAST.startNamespace name
+  namespace: (name, opts..., f=noop) ->
+    [name, opts, f] = normalize arguments...
+    RouteAST.startNamespace name, opts
     DSL.ctx().route name, path: "/#{name}", DSL.run f
     RouteAST.end name
 
   child: (name, opts..., f=noop) ->
-    [name, {as: modelName}, f] = normalize arguments...
-    modelName ?= name
-    RouteAST.startChild name, modelName
+    [name, opts, f] = normalize arguments...
+    modelName = opts.as ? name
+    RouteAST.startChild name, modelName, opts
     DSL.ctx().route name, path: "/#{name}", DSL.run f
     RouteAST.end name
 
   children: (name, opts..., f=noop) ->
-    [name, {as: modelName}, f] = normalize arguments...
-    modelName ?= singularize name
-    RouteAST.startChildren name, modelName
+    [name, opts, f] = normalize arguments...
+    modelName = singularize(opts.as ? name)
+    RouteAST.startChildren name, modelName, opts
     DSL.ctx().route name, path: "/#{name}", DSL.run f
     RouteAST.end name
 
-  collection: (name, f=noop) ->
-    RouteAST.startCollection name
+  collection: (name, opts..., f=noop) ->
+    [name, opts, f] = normalize arguments...
+    RouteAST.startCollection name, opts
     DSL.ctx().route name, path: "/#{name}", DSL.run f
     RouteAST.end name
 
-  model: (name, f=noop) ->
-    RouteAST.startModel name
+  model: (name, opts..., f=noop) ->
+    [name, opts, f] = normalize arguments...
+    RouteAST.startModel name, opts
     DSL.ctx().route name, path: "/#{name}/:#{name}_id", DSL.run f
     RouteAST.end name
 
-  form: (name) ->
-    RouteAST.startForm name
+  form: (name, opts) ->
+    RouteAST.startForm name, opts
     DSL.ctx().route name
     RouteAST.end name
 
-  view: (name) ->
-    RouteAST.startView name
+  view: (name, opts) ->
+    RouteAST.startView name, opts
     DSL.ctx().route name
     RouteAST.end name
 
